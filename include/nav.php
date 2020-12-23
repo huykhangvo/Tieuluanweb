@@ -66,8 +66,8 @@ while($row_category_danhmuc = mysqli_fetch_array($sql_category_danhmuc)){
             ?>
                             <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Đăng Nhập / Đăng Ký <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="../ss/Dangnhap.php">Đăng Nhập</a></li>
-                                    <li><a href="../ss/Dangky.php">Đăng Ký</a></li>
+                                    <li><a href="../Dangnhap.php">Đăng Nhập</a></li>
+                                    <li><a href="../Dangky.php">Đăng Ký</a></li>
                                   
         <?php
 if (isset($_SESSION['dangnhap_home'])) {
