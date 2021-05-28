@@ -1,39 +1,48 @@
 <?php
 if (isset($_GET['id'])) {
-	$id = $_GET['id'];
+$id = $_GET['id'];
 } else {
-	$id = '';
+$id = '';
 }
-$sql_cate = mysqli_query($con, "SELECT * FROM tbl_category,tbl_sanpham WHERE tbl_category.category_id=tbl_sanpham.category_id AND tbl_sanpham.category_id='$id' ORDER BY tbl_sanpham.sanpham_id ASC");
-$sql_category = mysqli_query($con, "SELECT * FROM tbl_category,tbl_sanpham WHERE tbl_category.category_id=tbl_sanpham.category_id AND tbl_sanpham.category_id='$id' ORDER BY tbl_sanpham.sanpham_id ASC");
+$sql_cate = mysqli_query($con, "SELECT * FROM tbl_category,tbl_dulich WHERE tbl_category.category_id=tbl_dulich.category_id AND tbl_dulich.category_id='$id' ORDER BY tbl_dulich.dulich_id ASC");
+$sql_category = mysqli_query($con, "SELECT * FROM tbl_category,tbl_dulich WHERE tbl_category.category_id=tbl_dulich.category_id AND tbl_dulich.category_id='$id' ORDER BY tbl_dulich.dulich_id ASC");
 $row_title = mysqli_fetch_array($sql_cate);
 $title = $row_title['category_name'];
 ?>
+ <style type="text/css">
+		.card-group {
+            text-align: center; 
+            display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+        }
 
-							<?php
-							while ($row_sanpham = mysqli_fetch_array($sql_category)) {
-							?>
-	<div  class="box_left_home">
+	</style>
+<!--Sản phẩm khuyến mãi nổi bật-->
+<div class="box_left_home">
 <div class="categorysarea">
-	<class class="productsarea"><ul>
-<!--Bắt đầu 1 sản phẩm-->	
-</li><li class=""><span class="badge_nphantram"><strong>21%</strong>off</span>
-<div class="images"><img class="lazy" src="uploads/<?php echo $row_sanpham['sanpham_image'] ?>" alt="Tên hình ảnh" /></div>
-<h3><?php echo $row_sanpham['sanpham_name'] ?></h3>
-<h4>Ghi chú nhỏ</h4>
-<p class="price"><s><?php echo number_format($row_sanpham['sanpham_gia']) . 'vnđ' ?></s><?php echo number_format($row_sanpham['sanpham_giakhuyenmai']) . 'vnđ' ?></p><class class="bginfodiv" data-link="sp1">
-<a href="?quanly=chitietsp&id=<?php echo $row_sanpham['sanpham_id'] ?>" class="bginfo">
-<span class="nameinfo"><?php echo $row_sanpham['sanpham_name'] ?></span>
-<span class="priceinfo"><s><?php echo number_format($row_sanpham['sanpham_gia']) . 'vnđ' ?></s><?php echo number_format($row_sanpham['sanpham_giakhuyenmai']) . 'vnđ' ?></span>
-<p><?php echo $row_sanpham['sanpham_name'] ?>
-<br>mô tả nhỏs
-<br>kích thước
-<br>muốn có ghi chú nhiều thêm br xuống dòng
-<br>Bạn muốn đặt Size vào chăm sóc khách khách hàng để biết thêm chi tiết
-<br>Trọng lượng: 1,2 g</p>
+<a class="ah2">
+        <h2><?php echo $title ?></h2>
 </a>
-					</div>
 
-					<?php
-							} ?>
-	        </div>
+<class class="productsarea">
+        <ul>
+                <!--  Bắt đầu dòng lặp sản phẩm -->
+                <?php
+                while ($row_dulich = mysqli_fetch_array($sql_category)) {
+                ?>
+                        <!--Bắt đầu 1 sản phẩm-->
+                        <div class="card-group">
+                                <div class="card">
+                                        <img class="card-img-top" src="uploads/<?php echo $row_dulich['dulich_image'] ?>" alt="">
+                                        <div class="card-body">
+                                                <h5 class="card-title"><?php echo $row_dulich['dulich_name'] ?></h5>
+                                                <a href="?quanly=chitietsp&id=<?php echo $row_dulich['dulich_id'] ?>" class="btn btn-primary">Xem chi tiết</a>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <?php
+                } // đóng while cho sản phẩm
+                ?>
